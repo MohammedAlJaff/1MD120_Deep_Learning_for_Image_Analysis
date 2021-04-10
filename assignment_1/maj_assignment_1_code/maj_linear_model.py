@@ -12,7 +12,7 @@ def standarize_data(X):
 
 class LinearRegressionModel():
     
-    # status:
+    # status: DONE
     def __init__(self, data_X, true_label_Y, learning_rate=0.01):
         self.__initialize_parameters(data_X)
         # gradient decent step-size
@@ -20,7 +20,7 @@ class LinearRegressionModel():
         #print(f"nr of params: {self.nr_params}")
         
         
-    # status:    
+    # status: DONE   
     def __initialize_parameters(self, X):
     
         self.nr_params = self.__determine_nr_model_params(X)
@@ -32,16 +32,16 @@ class LinearRegressionModel():
         self.W = 0.01*np.random.normal(size=self.nr_params-1).reshape([self.nr_params-1, 1])
     
     
-    # status:
+    # status: DONE
     def __determine_nr_model_params(self, X):
         return X.shape[1] + 1 # Number of features + extra for ofs
     
-    # status:
+    # status: DONE
     def nr_of_params(self):
         return self.nr_params
     
     
-    # status:        
+    # status: DONE    
     def model_forward(self, X):
         
         if self.W.shape[0] != X.shape[1]:            
@@ -57,7 +57,7 @@ class LinearRegressionModel():
         return self.model_forward(X)
     
     
-    # status: 
+    # status: DONE
     def compute_cost(self, X, y_true):
         # Get Dataset size
         N = X.shape[0]
@@ -76,7 +76,7 @@ class LinearRegressionModel():
         return cc_cost
     
     
-    
+     # status: DONE but unused. Used only for gradient validation and comparision
     def J(self, X, y_true, w, b):
         # Dataset size
         N = X.shape[0]
@@ -114,12 +114,14 @@ class LinearRegressionModel():
         return grad_J_w, grad_J_b
     
     
+    # status: DONE
     def update_parameters(self, X, y_true, learning_rate=0.01):
         grad_J_w, grad_J_b = self.grad_J(X, y_true)    
         self.W = self.W  - learning_rate*grad_J_w
         self.b = self.b  - learning_rate*grad_J_b
 
-        
+
+    # status: DONE
     def train_linear_model(self, X, y_true, nr_iter, learning_rate=0.01, verbose=False):
         training_J = np.zeros(nr_iter)    
         for i in range(nr_iter):
@@ -133,6 +135,7 @@ class LinearRegressionModel():
         return self.W, self.b, training_J
     
     
+     # status: DONE but unused. Used only for gradient validation and comparision
     def numerical_grad_J(self, X, y_true, h=0.0001):
         
         W =  self.W
@@ -154,8 +157,9 @@ class LinearRegressionModel():
         num_grad_J_b = (self.J(X, y_true, W, b+db) - self.J(X, y_true, W, b)) / h
         #print(num_grad_J_b)        
         return num_grad_J_w, num_grad_J_b 
+         
             
-
+    # status: DONE but unused. Used only for gradient validation and comparision
     def update_params_one_step_numeric(self, X, y_true):
         
         grad_J_w, grad_J_b = self.numerical_grad_J(X, y_true)
@@ -164,6 +168,7 @@ class LinearRegressionModel():
         self.b = self.b  - self.learning_rate*grad_J_b
         
     
+    # status: DONE
     def replace_params(self, W_new, b_new):
         if W_new.shape != self.W.shape:
             msg = f"Model W shape: {self.W.shape}. Replacement shape {W_new.shape}"
@@ -173,6 +178,7 @@ class LinearRegressionModel():
         self.b = b_new
         
         
+    # status: DONE
     def get_params(self):
         return self.W, self.b
     
